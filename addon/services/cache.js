@@ -1,6 +1,6 @@
-/* global moment */
 /* eslint-disable prefer-spread, no-implicit-coercion */
 import Ember from 'ember';
+import moment from 'moment';
 import storageFor from 'ember-storages/utils/storage-for';
 
 const {
