@@ -13,6 +13,7 @@
   },
   "repository": "",
   "scripts": {
+    "postinstall": "bower install && bower update",
     "build": "ember build",
     "start": "ember server",
     "test": "ember try:each"
@@ -28,7 +29,6 @@
     "ember-cli-htmlbars": "1.1.1",
     "ember-cli-htmlbars-inline-precompile": "0.3.6",
     "ember-cli-inject-live-reload": "1.6.1",
-    "ember-cli-moment-shim": "^3.3.1",
     "ember-cli-qunit": "3.1.1",
     "ember-cli-shims": "1.1.0",
     "ember-cli-sri": "2.1.1",

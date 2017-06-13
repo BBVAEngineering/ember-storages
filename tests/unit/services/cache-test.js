@@ -1,6 +1,6 @@
+/* global moment */
 /* eslint-disable func-style, no-implicit-coercion */
 import Ember from 'ember';
-import moment from 'moment';
 import { moduleFor, test } from 'ember-qunit';
 import { wrap } from 'ember-storages/services/cache';
 

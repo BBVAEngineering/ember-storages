@@ -1,4 +1,6 @@
 {
   "name": "ember-storages",
-  "dependencies": {}
+  "dependencies": {
+    "moment": "2.10.6"
+  }
 }
