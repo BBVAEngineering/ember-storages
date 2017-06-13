@@ -13,7 +13,6 @@
   },
   "repository": "",
   "scripts": {
-    "postinstall": "bower install && bower update",
     "build": "ember build",
     "start": "ember server",
     "test": "ember try:each"
