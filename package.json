@@ -5,7 +5,7 @@
   "keywords": [
     "ember-addon"
   ],
-  "license": "UNLICENSED",
+  "license": "MIT",
   "author": "BBVAEngineering",
   "directories": {
     "doc": "doc",
@@ -17,6 +17,10 @@
     "start": "ember server",
     "test": "ember try:each"
   },
+  "contributors": [{
+    "name": "shokmaster",
+    "email": "shokmaster@gmail.com"
+  }],
   "dependencies": {
     "ember-cli-babel": "^5.1.7"
   },
