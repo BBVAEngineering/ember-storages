@@ -40,6 +40,18 @@ test('it writes property to storage when it does not has it', function(assert) {
 	assert.equal(deserialize('cache:foo').data, 'bar');
 });
 
+test('it writes empty property to storage when it has meta', function(assert) {
+	service = this.container.lookup('service:cache');
+
+	Ember.run(() => {
+		service.set('foo', null, { foo: 'bar' });
+	});
+
+	assert.notOk(service.get('foo'));
+	assert.notOk(deserialize('cache:foo').data);
+	assert.equal(deserialize('cache:foo').meta.foo, 'bar');
+});
+
 test('it writes complex property to storage when it does not has it', function(assert) {
 	service = this.container.lookup('service:cache');
 
