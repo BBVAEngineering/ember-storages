@@ -343,8 +343,8 @@ export default Service.extend({
 			value = valueData;
 		}
 
-		// If we have value, is a store or update for a property.
-		if (isPresent(value)) {
+		// If we have value or meta, store or update for a property.
+		if (isPresent(value) || (!value && meta)) {
 			if (meta) {
 				meta = checkMeta(meta);
 
