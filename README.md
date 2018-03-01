@@ -15,11 +15,76 @@ An [ember-cli addon](http://www.ember-cli.com/) to store data in storages (cache
 
 In your application's directory:
 
-    ember install ember-storages
+  ember install ember-storages
 
 ## Usage
 
-TBW
+This service is a overall cache which saves any type of data, by synchronizing them in memory and in localStorage.
+In both reading and writing, MemoryStorage takes precedence over LocalStorage.
+In the reading, when it is detected that the data has expired, it is deleted.
+
+Example:
+
+```javascript
+
+this.get('cache').set('foo', 'bar');
+this.get('cache').get('foo'); // bar
+
+```
+
+It can be used from any file where this service is injected (by default in every routes and controllers).
+
+### Data validity
+
+By default, the validity time of these data is 10 minutes.
+We can change this time by passing the amount of minutes or by passing the metadata object:
+
+```javascript
+
+this.get('cache').set('foo', 'bar', moment().add(10, 'minutes'));  // 10 min
+this.get('cache').set('foo', 'bar', {
+  expire: moment().add(10, 'minutes'),   // 10 min
+});
+
+```
+
+### Data structure
+
+The data is saved with the follow structure:
+
+```javascript
+
+foo: {
+  meta: {
+       updated: 1429806124,     << last updated time
+        expire: 1429806124       << time of expiration
+    },
+    data: "bar"
+}
+
+```
+
+'meta.expire' is the timestamp in which time the data will be expired.
+'data' is the storaged value.
+
+### Bindings
+
+We can bind a property of controller and a value in cache.
+Example:
+
+```javascript
+
+export default Ember.Controller.extend({
+    foo: Ember.computed.alias('this.cache.foo'),
+     actions: {
+        changeFoo() {
+            this.set('foo', 'bar2');
+        },
+    }
+    ...
+}
+
+```
 
 ## Contribute
 
@@ -28,7 +93,6 @@ If you want to contribute to this addon, please read the [CONTRIBUTING.md](CONTR
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/BBVAEngineering/ember-storages/tags).
-
 
 ## Authors
 
