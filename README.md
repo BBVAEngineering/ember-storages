@@ -19,7 +19,7 @@ In your application's directory:
 
 ## Usage
 
-This service is a overall cache which saves any type of data, by synchronizing them in memory and in localStorage.
+This service is an overall cache which saves any type of data, by synchronizing them in memory and in localStorage.
 In both reading and writing, MemoryStorage takes precedence over LocalStorage.
 In the reading, when it is detected that the data has expired, it is deleted.
 
