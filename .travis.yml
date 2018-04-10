@@ -29,18 +29,18 @@ matrix:
 
 before_install:
   - npm config set spin false
-  - npm install -g npm@4
+  - npm install -g npm@^5.7
   - npm i -g bower
   - npm --version
   - bower --version
 
+install:
+  - npm ci
+  - bower install
+
 before_script:
   - sudo chown root /opt/google/chrome/chrome-sandbox
   - sudo chmod 4755 /opt/google/chrome/chrome-sandbox
-
-install:
-  - npm install
-  - bower install
 
 script:
   # Usually, it's ok to finish the test scenario without reverting
