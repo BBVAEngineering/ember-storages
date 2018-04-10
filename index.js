@@ -5,7 +5,7 @@ module.exports = {
 	name: 'ember-storages',
 
 	included: function included(app, parentAddon) {
-		var target = (parentAddon || app);
+		const target = (parentAddon || app);
 
 		app.import('vendor/vendor-exports.js');
 
