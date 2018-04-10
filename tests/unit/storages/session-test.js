@@ -843,7 +843,7 @@ test('it returns all keys from initialContent', function(assert) {
 		storage = this.subject();
 	});
 
-	assert.deepEqual(storage.keys(), ['foz', 'foo']);
+	assert.deepEqual(storage.keys(), ['foo', 'foz']);
 });
 
 test('it returns all keys from storage', function(assert) {
@@ -859,7 +859,8 @@ test('it returns all keys from storage', function(assert) {
 	const sessionStorageKeys = getSessionStorageKeys();
 
 	assert.deepEqual(storage.keys(), ['foo', 'foz']);
-	assert.deepEqual(sessionStorageKeys, ['session:foz', 'session:foo']);
+	assert.ok(sessionStorageKeys.includes('session:foz'));
+	assert.ok(sessionStorageKeys.includes('session:foo'));
 });
 
 test('it does nothing when has no sessionStorage', function(assert) {
