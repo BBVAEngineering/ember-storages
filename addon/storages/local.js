@@ -125,7 +125,7 @@ export default ObjectProxy.extend(StorageMixin, {
 		}
 
 		// Defer localStorage call.
-		schedule('sync', this, () => {
+		schedule('actions', this, () => {
 			const keyParts = key.split('.');
 			const isNestedProperty = keyParts.length > 1;
 
@@ -176,7 +176,7 @@ export default ObjectProxy.extend(StorageMixin, {
 
 		if (this.get('adapter')) {
 			// Defer localStorage deletion.
-			schedule('sync', this, '_deleteFromAdapter', key);
+			schedule('actions', this, '_deleteFromAdapter', key);
 		}
 	},
 
