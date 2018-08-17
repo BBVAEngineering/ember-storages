@@ -613,7 +613,7 @@ test('it blocks synchronization when property changes began', function(assert) {
 	Ember.run(function() {
 		service.clear();
 
-		Ember.run.schedule('sync', this, () => {
+		Ember.run.schedule('actions', this, () => {
 			assert.notOk(service.get('baz'));
 		});
 
