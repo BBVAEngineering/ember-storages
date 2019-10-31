@@ -56,7 +56,7 @@
     "ember-resolver": "2.0.3",
     "ember-sinon": "0.5.1",
     "ember-source": "2.12.1",
-    "eslint": "3.0.0",
+    "eslint": "4.18.2",
     "eslint-config-bbva": "2.0.0",
     "loader.js": "4.2.3"
   },
