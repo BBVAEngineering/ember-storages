@@ -843,7 +843,8 @@ test('it returns all keys from initialContent', function(assert) {
 		storage = this.subject();
 	});
 
-	assert.deepEqual(storage.keys(), ['foo', 'foz']);
+	assert.equal(storage.keys()[0], 'foz');
+	assert.equal(storage.keys()[1], 'foo');
 });
 
 test('it returns all keys from storage', function(assert) {
