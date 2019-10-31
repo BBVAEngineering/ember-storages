@@ -1,6 +1,5 @@
 /* eslint-disable func-style, no-implicit-coercion */
 import Ember from 'ember';
-import moment from 'moment';
 import { moduleFor, test } from 'ember-qunit';
 import { wrap } from 'ember-storages/services/cache';
 
@@ -18,7 +17,7 @@ moduleFor('service:cache', 'Unit | Service | cache', {
 const deserialize = (key) => JSON.parse(window.localStorage.getItem(key));
 
 test('it clears expired properties at init', function(assert) {
-	const meta = { expire: +moment('2000-01-01') };
+	const meta = { expire: new Date('2000-01-01').getTime() };
 
 	window.localStorage.setItem('cache:foo', JSON.stringify(wrap('bar', meta)));
 
@@ -126,7 +125,7 @@ test('it returns the correct value for the same Ember run loop', function(assert
 });
 
 test('it does not replicates expired property from local to memory', function(assert) {
-	const meta = { expire: +moment('2000-01-01') };
+	const meta = { expire: new Date('2000-01-01').getTime() };
 
 	window.localStorage.setItem('cache:foo', JSON.stringify(wrap('bar', meta)));
 
@@ -213,7 +212,7 @@ test('it does not get property when expire time is expired', function(assert) {
 	service = this.container.lookup('service:cache');
 
 	Ember.run(() => {
-		service.set('foo', wrap('bar'), { expire: +moment('2000-01-01') });
+		service.set('foo', wrap('bar'), { expire: new Date('2000-01-01').getTime() });
 	});
 
 	assert.notOk(service.get('foo'));
@@ -223,7 +222,7 @@ test('it does not set property key when expire time is expired', function(assert
 	service = this.container.lookup('service:cache');
 
 	Ember.run(() => {
-		service.set('foo', wrap('bar'), { expire: +moment('2000-01-01') });
+		service.set('foo', wrap('bar'), { expire: new Date('2000-01-01').getTime() });
 	});
 
 	assert.notOk(service.get('foo'));
@@ -233,7 +232,7 @@ test('it does not get property key when expire time is expired', function(assert
 	service = this.container.lookup('service:cache');
 
 	Ember.run(() => {
-		service.set('foo', wrap('bar'), { expire: +moment('2000-01-01') });
+		service.set('foo', wrap('bar'), { expire: new Date('2000-01-01').getTime() });
 	});
 
 	assert.notDeepEqual(service.keys(), ['foo']);
@@ -242,7 +241,7 @@ test('it does not get property key when expire time is expired', function(assert
 test('it writes options to storages when writes a property', function(assert) {
 	service = this.container.lookup('service:cache');
 
-	const time = +moment('2020-01-01');
+	const time = new Date('2020-01-01').getTime();
 
 	Ember.run(() => {
 		service.set('foo', 'bar', { expire: time });
@@ -256,7 +255,7 @@ test('it writes options to storages when writes a property', function(assert) {
 test('it accepts moment object as expire time', function(assert) {
 	service = this.container.lookup('service:cache');
 
-	const time = moment('2020-01-01');
+	const time = new Date('2020-01-01').getTime();
 
 	Ember.run(() => {
 		service.set('foo', 'bar', { expire: time });
@@ -278,7 +277,7 @@ test('it accepts moment object as expire time', function(assert) {
 test('it merges options to storages when updates a property', function(assert) {
 	service = this.container.lookup('service:cache');
 
-	const time = +moment('2020-01-01');
+	const time = new Date('2020-01-01').getTime();
 
 	Ember.run(() => {
 		service.set('foo', 'bar', { expire: time });
@@ -295,8 +294,8 @@ test('it merges options to storages when updates a property', function(assert) {
 test('it updates options when updates a property', function(assert) {
 	service = this.container.lookup('service:cache');
 
-	const time1 = +moment('2020-01-01');
-	const time2 = +moment('2020-01-02');
+	const time1 = new Date('2020-01-01').getTime();
+	const time2 = new Date('2020-01-02').getTime();
 
 	Ember.run(() => {
 		service.set('foo', 'bar', { expire: time1 });
@@ -311,8 +310,8 @@ test('it updates options when updates a property', function(assert) {
 test('it updates options when updates a complex property', function(assert) {
 	service = this.container.lookup('service:cache');
 
-	const time1 = +moment('2020-01-01');
-	const time2 = +moment('2020-01-02');
+	const time1 = new Date('2020-01-01').getTime();
+	const time2 = new Date('2020-01-02').getTime();
 
 	Ember.run(() => {
 		service.set('foo', { bar: { foz: 'wow' } }, { expire: time1 });
@@ -341,7 +340,7 @@ test('it writes meta updated when writes a property by default', function(assert
 test('it writes expire time property as default meta when is a number', function(assert) {
 	service = this.container.lookup('service:cache');
 
-	const time = +moment('2020-01-01');
+	const time = new Date('2020-01-01').getTime();
 
 	Ember.run(() => {
 		service.set('foo', 'bar', time);
@@ -540,7 +539,7 @@ test('it does not fire observed property when property is already deleted in the
 test('it does not reads full block even when is expired', function(assert) {
 	service = this.container.lookup('service:cache');
 
-	const time = +moment('2001-01-01');
+	const time = new Date('2001-01-01').getTime();
 
 	Ember.run(() => {
 		service.set('foo', 'bar', time);
