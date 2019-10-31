@@ -1,6 +1,5 @@
 /* eslint-disable prefer-spread, no-implicit-coercion */
 import Ember from 'ember';
-import moment from 'moment';
 import storageFor from 'ember-storages/utils/storage-for';
 
 const {
@@ -23,7 +22,7 @@ const {
  * @return Boolean
  */
 export const checkBlock = (block) => {
-	const now = +moment();
+	const now = Date.now();
 	const expire = get(block, 'meta.expire');
 
 	// Si no ha expirado
@@ -69,7 +68,7 @@ function checkMeta(meta) {
 export const wrap = (data, meta = {}) => {
 	const block = { data, meta };
 
-	block.meta.updated = +moment();
+	block.meta.updated = Date.now();
 
 	return block;
 };
