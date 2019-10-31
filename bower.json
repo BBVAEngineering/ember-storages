@@ -1,6 +1,9 @@
 {
   "name": "ember-storages",
   "dependencies": {
-    "moment": "2.10.6"
+    "ember": "components/ember#lts-2-4"
+  },
+  "resolutions": {
+    "ember": "lts-2-4"
   }
 }
