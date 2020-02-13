@@ -1,9 +1,0 @@
-{
-  "name": "ember-storages",
-  "dependencies": {
-    "ember": "components/ember#lts-2-4"
-  },
-  "resolutions": {
-    "ember": "lts-2-4"
-  }
-}
