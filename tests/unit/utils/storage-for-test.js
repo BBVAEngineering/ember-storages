@@ -9,64 +9,64 @@ import sinon from 'sinon';
 
 let stub;
 
-module('Unit | Util | storage-for', function(hooks) {
-  hooks.beforeEach(function() {
-      stub = sinon.stub(Ember, 'getOwner', () => ({
-          lookup(type) { // eslint-disable-line consistent-return
-              if (type.match(LOCAL)) {
-                  return LocalStorage.create();
-              }
-              if (type.match(MEMORY)) {
-                  return MemoryStorage.create();
-              }
-          }
-      }));
-  });
+module('Unit | Util | storage-for', (hooks) => {
+	hooks.beforeEach(() => {
+		stub = sinon.stub(Ember, 'getOwner', () => ({
+			lookup(type) { // eslint-disable-line consistent-return
+				if (type.match(LOCAL)) {
+					return LocalStorage.create();
+				}
+				if (type.match(MEMORY)) {
+					return MemoryStorage.create();
+				}
+			}
+		}));
+	});
 
-  hooks.afterEach(function() {
-      stub.restore();
-  });
+	hooks.afterEach(() => {
+		stub.restore();
+	});
 
-  test('it returns local storage as default', (assert) => {
-      const object = EmberObject.extend({
-          storage: storageFor()
-      }).create();
+	test('it returns local storage as default', (assert) => {
+		const object = EmberObject.extend({
+			storage: storageFor()
+		}).create();
 
-      assert.ok(LocalStorage.detectInstance(object.get('storage')));
+		assert.ok(LocalStorage.detectInstance(object.get('storage')));
 
-      run(object, 'destroy');
-  });
+		run(object, 'destroy');
+	});
 
-  test('it returns storage passed in arguments', (assert) => {
-      const local = EmberObject.extend({
-          storage: storageFor(LOCAL)
-      }).create();
-      const memory = EmberObject.extend({
-          storage: storageFor(MEMORY)
-      }).create();
+	test('it returns storage passed in arguments', (assert) => {
+		const local = EmberObject.extend({
+			storage: storageFor(LOCAL)
+		}).create();
+		const memory = EmberObject.extend({
+			storage: storageFor(MEMORY)
+		}).create();
 
-      assert.ok(LocalStorage.detectInstance(local.get('storage')));
-      assert.ok(MemoryStorage.detectInstance(memory.get('storage')));
+		assert.ok(LocalStorage.detectInstance(local.get('storage')));
+		assert.ok(MemoryStorage.detectInstance(memory.get('storage')));
 
-      run(local, 'destroy');
-      run(memory, 'destroy');
-  });
+		run(local, 'destroy');
+		run(memory, 'destroy');
+	});
 
-  test('it returns a computed property', (assert) => {
-      const storage = storageFor('foo');
+	test('it returns a computed property', (assert) => {
+		const storage = storageFor('foo');
 
-      assert.ok(storage instanceof ComputedProperty);
-  });
+		assert.ok(storage instanceof ComputedProperty);
+	});
 
-  test('it throws an error if storage was not found', (assert) => {
-      const object = EmberObject.extend({
-          storage: storageFor('foo')
-      }).create();
+	test('it throws an error if storage was not found', (assert) => {
+		const object = EmberObject.extend({
+			storage: storageFor('foo')
+		}).create();
 
-      assert.throws(() => {
-          object.get('storage');
-      });
+		assert.throws(() => {
+			object.get('storage');
+		});
 
-      run(object, 'destroy');
-  });
+		run(object, 'destroy');
+	});
 });
