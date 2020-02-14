@@ -1,12 +1,9 @@
 /* eslint-disable consistent-return */
 
-import Ember from 'ember';
-import StorageMixin from 'ember-storages/mixins/storage';
+import EmberObject, { computed } from '@ember/object';
 
-const {
-	computed,
-	ObjectProxy
-} = Ember;
+import ObjectProxy from '@ember/object/proxy';
+import StorageMixin from 'ember-storages/mixins/storage';
 
 /**
  * Storage base to implement memory or local storage functionality.
@@ -23,7 +20,7 @@ export default ObjectProxy.extend(StorageMixin, {
 	 * @type {Object}
 	 * @default Ember.Object
 	 */
-	initialContent: computed(() => Ember.Object.create()),
+	initialContent: computed(() => EmberObject.create()),
 
 	/**
 	 * Namespace to serialize keys.

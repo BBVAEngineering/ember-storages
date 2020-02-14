@@ -1,13 +1,8 @@
-import Ember from 'ember';
-
-const {
-	A,
-	aliasMethod,
-	isNone,
-	Mixin,
-	on,
-	set
-} = Ember;
+import { A } from '@ember/array';
+import { isNone } from '@ember/utils';
+import Mixin from '@ember/object/mixin';
+import { on } from '@ember/object/evented';
+import { set, aliasMethod } from '@ember/object';
 
 const SEPARATOR = ':';
 

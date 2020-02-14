@@ -1,9 +1,8 @@
 /* eslint-disable consistent-return */
 
-import Ember from 'ember';
-import LocalStorage from 'ember-storages/storages/local';
+import { computed } from '@ember/object';
 
-const { computed } = Ember;
+import LocalStorage from 'ember-storages/storages/local';
 
 /**
  * Implementation of memory storage on local storage.

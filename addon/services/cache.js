@@ -1,18 +1,10 @@
 /* eslint-disable prefer-spread, no-implicit-coercion */
-import Ember from 'ember';
-import storageFor from 'ember-storages/utils/storage-for';
+import { assign } from '@ember/polyfills';
 
-const {
-	aliasMethod,
-	assign,
-	get,
-	isEmpty,
-	isNone,
-	isPresent,
-	typeOf,
-	Service,
-	set
-} = Ember;
+import { typeOf, isPresent, isNone, isEmpty } from '@ember/utils';
+import Service from '@ember/service';
+import { set, get, aliasMethod } from '@ember/object';
+import storageFor from 'ember-storages/utils/storage-for';
 
 /**
  * Check if a cache block is valid.
