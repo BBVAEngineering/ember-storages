@@ -1,3 +1,5 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
 # compiled output
 /dist/
 /tmp/
@@ -16,6 +18,8 @@
 /npm-debug.log*
 /testem.log
 /yarn-error.log
+/tags*
+/.nyc_output
 
 # ember-try
 /.node_modules.ember-try/
