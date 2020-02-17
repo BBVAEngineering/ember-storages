@@ -1,6 +1,6 @@
+/* eslint-disable ember/no-observers */
 /* eslint-disable func-style, no-implicit-coercion */
 import { alias } from '@ember/object/computed';
-
 import EmberObject, { observer, get } from '@ember/object';
 import { run, schedule } from '@ember/runloop';
 import { module, test } from 'qunit';
@@ -244,7 +244,8 @@ module('Unit | Service | cache', (hooks) => {
 	test('it writes options to storages when writes a property', function(assert) {
 		service = this.owner.lookup('service:cache');
 
-		const time = new Date('2020-01-01').getTime();
+		const date = new Date();
+		const time = date.setDate(date.getDate() + 1);
 
 		run(() => {
 			service.set('foo', 'bar', { expire: time });
@@ -255,10 +256,11 @@ module('Unit | Service | cache', (hooks) => {
 		assert.equal(localData.meta.expire, time);
 	});
 
-	test('it accepts moment object as expire time', function(assert) {
+	test('it updates options to storages when updates a property', function(assert) {
 		service = this.owner.lookup('service:cache');
 
-		const time = new Date('2020-01-01').getTime();
+		const date = new Date();
+		const time = date.setDate(date.getDate() + 1);
 
 		run(() => {
 			service.set('foo', 'bar', { expire: time });
@@ -280,7 +282,8 @@ module('Unit | Service | cache', (hooks) => {
 	test('it merges options to storages when updates a property', function(assert) {
 		service = this.owner.lookup('service:cache');
 
-		const time = new Date('2020-01-01').getTime();
+		const date = new Date();
+		const time = date.setDate(date.getDate() + 1);
 
 		run(() => {
 			service.set('foo', 'bar', { expire: time });
@@ -297,8 +300,10 @@ module('Unit | Service | cache', (hooks) => {
 	test('it updates options when updates a property', function(assert) {
 		service = this.owner.lookup('service:cache');
 
-		const time1 = new Date('2020-01-01').getTime();
-		const time2 = new Date('2020-01-02').getTime();
+		const date1 = new Date();
+		const date2 = new Date();
+		const time1 = date1.setDate(date1.getDate() + 1);
+		const time2 = date2.setDate(date2.getDate() + 2);
 
 		run(() => {
 			service.set('foo', 'bar', { expire: time1 });
@@ -313,8 +318,10 @@ module('Unit | Service | cache', (hooks) => {
 	test('it updates options when updates a complex property', function(assert) {
 		service = this.owner.lookup('service:cache');
 
-		const time1 = new Date('2020-01-01').getTime();
-		const time2 = new Date('2020-01-02').getTime();
+		const date1 = new Date();
+		const date2 = new Date();
+		const time1 = date1.setDate(date1.getDate() + 1);
+		const time2 = date2.setDate(date2.getDate() + 2);
 
 		run(() => {
 			service.set('foo', { bar: { foz: 'wow' } }, { expire: time1 });
@@ -343,7 +350,8 @@ module('Unit | Service | cache', (hooks) => {
 	test('it writes expire time property as default meta when is a number', function(assert) {
 		service = this.owner.lookup('service:cache');
 
-		const time = new Date('2020-01-01').getTime();
+		const date = new Date();
+		const time = date.setDate(date.getDate() + 1);
 
 		run(() => {
 			service.set('foo', 'bar', time);
@@ -440,13 +448,13 @@ module('Unit | Service | cache', (hooks) => {
 			service,
 			observer: observer('service.foo', function() {
 				assert.equal(this.get('service.foo'), 'bar');
+
+				object.destroy();
 			})
 		}).create();
 
 		run(() => {
 			service.set('foo', 'bar');
-
-			object.destroy();
 		});
 	});
 
@@ -459,13 +467,13 @@ module('Unit | Service | cache', (hooks) => {
 			service,
 			observer: observer('service.foo.bar.foz', function() {
 				assert.notEqual(this.get('service.foo.foo.bar.foz'), 'wow');
+
+				object.destroy();
 			})
 		}).create();
 
 		run(() => {
 			service.set('foo', { bar: { foz: 'wow' } });
-
-			object.destroy();
 		});
 	});
 
@@ -482,13 +490,13 @@ module('Unit | Service | cache', (hooks) => {
 			service,
 			observer: observer('service.foo', function() {
 				assert.equal(this.get('service.foo'), 'wow');
+
+				object.destroy();
 			})
 		}).create();
 
 		run(() => {
 			service.set('foo', 'wow');
-
-			object.destroy();
 		});
 	});
 
@@ -505,13 +513,13 @@ module('Unit | Service | cache', (hooks) => {
 			service,
 			observer: observer('service.foo.bar.foz', function() {
 				assert.equal(this.get('service.foo.bar.foz'), 'yo');
+
+				object.destroy();
 			})
 		}).create();
 
 		run(() => {
 			service.set('foo.bar.foz', 'yo');
-
-			object.destroy();
 		});
 	});
 
@@ -529,13 +537,13 @@ module('Unit | Service | cache', (hooks) => {
 			service,
 			observer: observer('service.foo', () => {
 				assert.ok(false);
+
+				object.destroy();
 			})
 		}).create();
 
 		run(() => {
 			service.set('foo', null);
-
-			object.destroy();
 		});
 	});
 

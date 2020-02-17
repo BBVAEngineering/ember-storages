@@ -1,34 +1,33 @@
-import ComputedProperty from '@ember/object/computed';
 import { run } from '@ember/runloop';
 import EmberObject from '@ember/object';
+import { setOwner } from '@ember/application';
 import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 import LocalStorage from 'ember-storages/storages/local';
 import MemoryStorage from 'ember-storages/storages/memory';
 import storageFor, { LOCAL, MEMORY } from 'ember-storages/utils/storage-for';
-import sinon from 'sinon';
 
-let stub;
+let ContainerObject;
 
 module('Unit | Util | storage-for', (hooks) => {
-	hooks.beforeEach(() => {
-		stub = sinon.stub(Ember, 'getOwner', () => ({
-			lookup(type) { // eslint-disable-line consistent-return
-				if (type.match(LOCAL)) {
-					return LocalStorage.create();
-				}
-				if (type.match(MEMORY)) {
-					return MemoryStorage.create();
-				}
-			}
-		}));
-	});
+	setupTest(hooks);
 
-	hooks.afterEach(() => {
-		stub.restore();
+	hooks.beforeEach(function() {
+		this.owner.register(`storage:${LOCAL}`, LocalStorage.create(), { instantiate: false });
+		this.owner.register(`storage:${MEMORY}`, MemoryStorage.create(), { instantiate: false });
+
+		const { owner } = this;
+
+		ContainerObject = EmberObject.extend({
+			init() {
+				this._super();
+				setOwner(this, owner);
+			}
+		});
 	});
 
 	test('it returns local storage as default', (assert) => {
-		const object = EmberObject.extend({
+		const object = ContainerObject.extend({
 			storage: storageFor()
 		}).create();
 
@@ -38,10 +37,10 @@ module('Unit | Util | storage-for', (hooks) => {
 	});
 
 	test('it returns storage passed in arguments', (assert) => {
-		const local = EmberObject.extend({
+		const local = ContainerObject.extend({
 			storage: storageFor(LOCAL)
 		}).create();
-		const memory = EmberObject.extend({
+		const memory = ContainerObject.extend({
 			storage: storageFor(MEMORY)
 		}).create();
 
@@ -52,14 +51,8 @@ module('Unit | Util | storage-for', (hooks) => {
 		run(memory, 'destroy');
 	});
 
-	test('it returns a computed property', (assert) => {
-		const storage = storageFor('foo');
-
-		assert.ok(storage instanceof ComputedProperty);
-	});
-
 	test('it throws an error if storage was not found', (assert) => {
-		const object = EmberObject.extend({
+		const object = ContainerObject.extend({
 			storage: storageFor('foo')
 		}).create();
 
