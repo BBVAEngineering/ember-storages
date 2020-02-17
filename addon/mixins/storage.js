@@ -1,3 +1,4 @@
+/* eslint-disable ember/no-new-mixins */
 import { A } from '@ember/array';
 import { isNone } from '@ember/utils';
 import Mixin from '@ember/object/mixin';

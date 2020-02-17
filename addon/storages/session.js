@@ -19,6 +19,8 @@ export default LocalStorage.extend({
 	 * @type {Object}
 	 * @default window.localStorage
 	 */
+	// "ember/no-arrow-function-computed-properties" conflicts with "prefer-arrow-callback"
+	// eslint-disable-next-line ember/no-arrow-function-computed-properties
 	adapter: computed(() => window.sessionStorage),
 
 	/**
