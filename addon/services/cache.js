@@ -3,7 +3,7 @@ import { assign } from '@ember/polyfills';
 
 import { typeOf, isPresent, isNone, isEmpty } from '@ember/utils';
 import Service from '@ember/service';
-import { set, get, aliasMethod } from '@ember/object';
+import { set, get } from '@ember/object';
 import storageFor from 'ember-storages/utils/storage-for';
 
 /**
@@ -174,21 +174,27 @@ export default Service.extend({
 	 *
 	 * @method set
 	 */
-	set: aliasMethod('_set'),
+	set() {
+		return this._set(...arguments);
+	},
 
 	/**
 	 * Alias of _get method.
 	 *
 	 * @method unknownProperty
 	 */
-	unknownProperty: aliasMethod('_get'),
+	unknownProperty() {
+		return this._get(...arguments);
+	},
 
 	/**
 	 * Alias of _set method.
 	 *
 	 * @method setUnknownProperty
 	 */
-	setUnknownProperty: aliasMethod('_set'),
+	setUnknownProperty() {
+		return this._set(...arguments);
+	},
 
 	/**
 	 * Get keys from all storages.

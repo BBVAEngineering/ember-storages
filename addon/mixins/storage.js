@@ -3,7 +3,7 @@ import { A } from '@ember/array';
 import { isNone } from '@ember/utils';
 import Mixin from '@ember/object/mixin';
 import { on } from '@ember/object/evented';
-import { set, aliasMethod } from '@ember/object';
+import { set } from '@ember/object';
 
 const SEPARATOR = ':';
 
@@ -108,7 +108,9 @@ export default Mixin.create({
 	 * @param {String} key
 	 * @param {Mixed} value
 	 */
-	set: aliasMethod('setUnknownProperty'),
+	set() {
+		return this.setUnknownProperty(...arguments);
+	},
 
 	/**
 	 * Setter of properties.
