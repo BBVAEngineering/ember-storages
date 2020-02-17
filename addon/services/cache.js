@@ -321,6 +321,7 @@ export default Service.extend({
 	 * @param {Object|Number} meta
 	 * @private
 	 */
+	// eslint-disable-next-line complexity
 	_makeBlock(oldBlock, dataKey, value, meta) {
 		let block;
 		const isNestedProperty = isPresent(dataKey);
