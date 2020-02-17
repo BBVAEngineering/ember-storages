@@ -37,7 +37,7 @@
     "start": "ember serve",
     "test": "COVERAGE=true ember test",
     "test:all": "ember try:each",
-    "check-coverage": "istanbul check-coverage coverage/coverage-final.json --statements 100 --functions 100 --branches 100 --lines 100",
+    "check-coverage": "istanbul check-coverage coverage/coverage-final.json --statements 80 --functions 80 --branches 80 --lines 80",
     "commit": "git-cz",
     "lint": "npm run lint:js && npm run lint:hbs",
     "posttest": "npm run report-coverage && npm run check-coverage && npm run validate-coverage",
