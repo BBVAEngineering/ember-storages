@@ -5,7 +5,10 @@
   "keywords": [
     "ember-addon"
   ],
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BBVAEngineering/ember-storages.git"
+  },
   "license": "MIT",
   "author": "BBVAEngineering",
   "directories": {
