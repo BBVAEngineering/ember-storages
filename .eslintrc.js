@@ -13,7 +13,6 @@ module.exports = {
 		'bbva'
 	],
 	extends: [
-		'eslint:recommended',
 		'plugin:ember/recommended',
 		'eslint-config-bbva'
 	],
