@@ -1,18 +1,10 @@
 /* eslint-disable prefer-spread, no-implicit-coercion */
-import Ember from 'ember';
-import storageFor from 'ember-storages/utils/storage-for';
+import { assign } from '@ember/polyfills';
 
-const {
-	aliasMethod,
-	assign,
-	get,
-	isEmpty,
-	isNone,
-	isPresent,
-	typeOf,
-	Service,
-	set
-} = Ember;
+import { typeOf, isPresent, isNone, isEmpty } from '@ember/utils';
+import Service from '@ember/service';
+import { set, get } from '@ember/object';
+import storageFor from 'ember-storages/utils/storage-for';
 
 /**
  * Check if a cache block is valid.
@@ -182,21 +174,27 @@ export default Service.extend({
 	 *
 	 * @method set
 	 */
-	set: aliasMethod('_set'),
+	set() {
+		return this._set(...arguments);
+	},
 
 	/**
 	 * Alias of _get method.
 	 *
 	 * @method unknownProperty
 	 */
-	unknownProperty: aliasMethod('_get'),
+	unknownProperty() {
+		return this._get(...arguments);
+	},
 
 	/**
 	 * Alias of _set method.
 	 *
 	 * @method setUnknownProperty
 	 */
-	setUnknownProperty: aliasMethod('_set'),
+	setUnknownProperty() {
+		return this._set(...arguments);
+	},
 
 	/**
 	 * Get keys from all storages.
@@ -329,6 +327,7 @@ export default Service.extend({
 	 * @param {Object|Number} meta
 	 * @private
 	 */
+	// eslint-disable-next-line complexity
 	_makeBlock(oldBlock, dataKey, value, meta) {
 		let block;
 		const isNestedProperty = isPresent(dataKey);

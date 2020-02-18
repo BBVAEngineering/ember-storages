@@ -5,65 +5,89 @@
   "keywords": [
     "ember-addon"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BBVAEngineering/ember-storages.git"
+  },
   "license": "MIT",
   "author": "BBVAEngineering",
-  "contributors": [
-    {
-      "name": "beatrizdemiguelperez",
-      "url": "https://github.com/beatrizdemiguelperez/"
-    },
-    {
-      "name": "adrigzr",
-      "url": "https://github.com/adrigzr/"
-    },
-    {
-      "name": "shokmaster",
-      "url": "https://github.com/shokmaster/"
-    },
-    {
-      "name": "josex2r",
-      "url": "https://github.com/josex2r/"
-    }
-  ],
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
   "scripts": {
-    "build": "ember build",
-    "start": "ember server",
-    "test": "ember try:each"
+    "build": "ember build --environment=production",
+    "lint:hbs": "ember-template-lint .",
+    "lint:js": "eslint --max-warnings 0 ./*.js addon app config tests",
+    "start": "ember serve",
+    "test": "COVERAGE=true ember test",
+    "test:all": "ember try:each",
+    "check-coverage": "istanbul check-coverage coverage/coverage-final.json --statements 80 --functions 80 --branches 80 --lines 80",
+    "commit": "git-cz",
+    "lint": "npm run lint:js && npm run lint:hbs",
+    "posttest": "npm run report-coverage && npm run check-coverage && npm run validate-coverage",
+    "report-coverage": "istanbul report --include=coverage/coverage-final.json text",
+    "semantic-release": "semantic-release",
+    "validate-coverage": "test \"$(cat coverage/coverage-summary.json | json total.lines.total)\" -gt 0"
   },
   "dependencies": {
-    "ember-cli-babel": "^6.6.0"
+    "ember-cli-babel": "^7.17.2",
+    "ember-cli-htmlbars": "^4.2.2"
   },
   "devDependencies": {
-    "broccoli-asset-rev": "2.4.6",
-    "ember-cli": "2.12.1",
-    "ember-cli-dependency-checker": "1.3.0",
-    "ember-cli-eslint": "3.0.3",
-    "ember-cli-htmlbars": "1.1.1",
-    "ember-cli-htmlbars-inline-precompile": "1.0.3",
-    "ember-cli-inject-live-reload": "1.6.1",
-    "ember-cli-qunit": "3.1.1",
-    "ember-cli-shims": "1.1.0",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@ember/optional-features": "^1.3.0",
+    "@glimmer/component": "^1.0.0",
+    "@glimmer/tracking": "^1.0.0",
+    "@semantic-release/changelog": "^5.0.0",
+    "@semantic-release/git": "^9.0.0",
+    "babel-eslint": "^10.0.3",
+    "broccoli-asset-rev": "^3.0.0",
+    "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "^3.1.0",
+    "ember-auto-import": "^1.5.3",
+    "ember-cli": "~3.16.0",
+    "ember-cli-code-coverage": "^1.0.0-beta.8",
+    "ember-cli-dependency-checker": "^3.2.0",
+    "ember-cli-inject-live-reload": "^2.0.2",
     "ember-cli-sri": "2.1.1",
-    "ember-cli-uglify": "1.2.0",
-    "ember-disable-prototype-extensions": "1.1.0",
-    "ember-export-application-global": "1.0.5",
-    "ember-load-initializers": "0.6.3",
-    "ember-resolver": "2.0.3",
-    "ember-sinon": "0.5.1",
-    "ember-source": "2.12.1",
-    "eslint": "3.0.0",
-    "eslint-config-bbva": "2.0.0",
-    "loader.js": "4.2.3"
+    "ember-cli-uglify": "^3.0.0",
+    "ember-disable-prototype-extensions": "^1.1.3",
+    "ember-export-application-global": "^2.0.1",
+    "ember-load-initializers": "^2.1.1",
+    "ember-maybe-import-regenerator": "^0.1.6",
+    "ember-qunit": "^4.6.0",
+    "ember-resolver": "^7.0.0",
+    "ember-sinon": "^4.1.1",
+    "ember-source": "~3.16.0",
+    "ember-source-channel-url": "^2.0.1",
+    "ember-template-lint": "^1.13.2",
+    "ember-try": "^1.4.0",
+    "eslint": "^6.8.0",
+    "eslint-config-bbva": "^3.2.2",
+    "eslint-plugin-bbva": "^1.3.3",
+    "eslint-plugin-ember": "^7.8.0",
+    "eslint-plugin-node": "^11.0.0",
+    "husky": "^4.2.3",
+    "istanbul": "^0.4.5",
+    "json": "^9.0.6",
+    "loader.js": "^4.7.0",
+    "qunit-dom": "^1.0.0",
+    "semantic-release": "^17.0.3"
   },
   "engines": {
-    "node": ">= 4.2.6"
+    "node": "10.* || >= 12"
+  },
+  "ember": {
+    "edition": "octane"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

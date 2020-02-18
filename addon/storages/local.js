@@ -1,16 +1,10 @@
 /* eslint-disable consistent-return */
-
-import Ember from 'ember';
+import { A } from '@ember/array';
+import EmberObject, { computed } from '@ember/object';
+import ObjectProxy from '@ember/object/proxy';
+import { schedule } from '@ember/runloop';
+import { typeOf, isPresent } from '@ember/utils';
 import StorageMixin from 'ember-storages/mixins/storage';
-
-const {
-	A,
-	computed,
-	isPresent,
-	ObjectProxy,
-	run: { schedule },
-	typeOf
-} = Ember;
 
 /**
  * Implementation of memory storage on local storage.
@@ -27,7 +21,7 @@ export default ObjectProxy.extend(StorageMixin, {
 	 * @type {Object}
 	 * @default window.localStorage
 	 */
-	adapter: computed(() => window.localStorage),
+	adapter: window.localStorage,
 
 	/**
 	 * Initial content.
@@ -37,7 +31,7 @@ export default ObjectProxy.extend(StorageMixin, {
 	 * @default Ember.Object
 	 */
 	initialContent: computed(function() {
-		const content = Ember.Object.create();
+		const content = EmberObject.create();
 		const adapter = this.get('adapter');
 
 		if (!adapter) {
