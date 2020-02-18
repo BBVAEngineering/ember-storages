@@ -1,7 +1,5 @@
 /* eslint-disable consistent-return */
-
 import { A } from '@ember/array';
-
 import EmberObject, { computed } from '@ember/object';
 import ObjectProxy from '@ember/object/proxy';
 import { schedule } from '@ember/runloop';
@@ -23,9 +21,7 @@ export default ObjectProxy.extend(StorageMixin, {
 	 * @type {Object}
 	 * @default window.localStorage
 	 */
-	// "ember/no-arrow-function-computed-properties" conflicts with "prefer-arrow-callback"
-	// eslint-disable-next-line ember/no-arrow-function-computed-properties
-	adapter: computed(() => window.localStorage),
+	adapter: window.localStorage,
 
 	/**
 	 * Initial content.
