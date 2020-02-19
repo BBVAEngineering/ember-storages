@@ -54,7 +54,7 @@ jobs:
       script: skip
       deploy:
         provider: script
-        cleanup: false
+        cleanup: true
         script: npx semantic-release
 
 before_install:
