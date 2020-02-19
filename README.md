@@ -1,9 +1,12 @@
 # ember-storages
 
-[![Build Status](https://travis-ci.org/BBVAEngineering/ember-storages.svg?branch=master)](https://travis-ci.org/BBVAEngineering/ember-storages)
+[![Build Status](https://travis-ci.com/BBVAEngineering/ember-storages.svg?branch=master)](https://travis-ci.com/BBVAEngineering/ember-storages)
 [![GitHub version](https://badge.fury.io/gh/BBVAEngineering%2Fember-storages.svg)](https://badge.fury.io/gh/BBVAEngineering%2Fember-storages)
-[![npm version](https://badge.fury.io/js/ember-storages.svg)](https://badge.fury.io/js/ember-storages)
+[![NPM version](https://badge.fury.io/js/ember-storages.svg)](https://badge.fury.io/js/ember-storages)
 [![Dependency Status](https://david-dm.org/BBVAEngineering/ember-storages.svg)](https://david-dm.org/BBVAEngineering/ember-storages)
+[![codecov](https://codecov.io/gh/BBVAEngineering/ember-storages/branch/master/graph/badge.svg)](https://codecov.io/gh/BBVAEngineering/ember-storages)
+[![Greenkeeper badge](https://badges.greenkeeper.io/BBVAEngineering/ember-storages.svg)](https://greenkeeper.io/)
+[![Ember Observer Score](https://emberobserver.com/badges/ember-storages.svg)](https://emberobserver.com/addons/ember-storages)
 
 An [ember-cli addon](http://www.ember-cli.com/) to store data in storages (cache, local, memory, session).
 
